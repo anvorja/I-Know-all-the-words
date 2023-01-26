@@ -279,4 +279,57 @@ public class Model
         return flagNivel;
     }
 
+    /**
+     * This method modifies approved levels and determines whether or not the player starts from the first level.
+     * The repetir variable indicates whether or not the player wants to start from level 1
+     * @param repetir
+     */
+    public void setNivelesAprobados(boolean repetir){
+        borrarArreglosDePalabras();
+        if(repetir && (nivelActual == 10)){
+            nivelActual = 1;
+            miUsuario.setNivelDelJugador(0);
+            flagNivel= false;
+        }
+        else if(!repetir && nivelActual == 10){
+            flagNivel=false;
+            miUsuario.setNivelDelJugador(nivelActual);
+        }else if(flagNivel)
+        {
+            miUsuario.setNivelDelJugador(nivelActual);
+        }
+
+        setNivelActual();
+        flagPalabrasCorrectas = 0;
+
+    }
+
+    /**
+     * Method created in order to delete the ArrayLists content used for the words of the level in play
+     */
+    private void borrarArreglosDePalabras()
+    {
+        arraListPalabrasCorrectas.clear();
+        arraListPalabrasIncorrectas.clear();
+        arrayDePalabrasAleatorias.clear();
+    }
+
+    /*
+     * In case of doing fast tests by console
+     */
+//    public void hacerPruebasPorConsola()
+//    {
+//
+//        System.out.println("**Correctas**");
+//        for (String elementoC : arraListPalabrasCorrectas) {
+//            System.out.print(elementoC + " ");
+//        }
+//        System.out.println("\n**Incorrectas**");
+//        for (String elementoI : arraListPalabrasIncorrectas) {
+//            System.out.print(elementoI + " ");
+//        }
+//
+//        System.out.println("\nPalabras aleatorias: "+arrayDePalabrasAleatorias.size());
+//
+//    }
 }
