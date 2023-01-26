@@ -453,6 +453,62 @@ public class GUI extends JFrame {
     }
 
     /**
+     * Method to create the components to indicate if you want to start from level 1 or start from the current level
+     * These components are only created when passing level 10
+     */
+    public void crearComponentesRepetir()
+    {
+        panelOpciones = new JPanel();
+        panelOpciones.setPreferredSize(new Dimension(690, 70));
+        panelOpciones.setOpaque(false);
+        layoutPanelGame.gridx = 0;
+        layoutPanelGame.gridy = 1;
+        layoutPanelGame.gridwidth = 2;
+        layoutPanelGame.fill = GridBagConstraints.NONE;
+        layoutPanelGame.anchor = GridBagConstraints.CENTER;
+        panelGame.add(panelOpciones, layoutPanelGame);
+
+        botonRepetirSI = new JButton();
+        botonRepetirSI.addActionListener(escucha);
+        botonRepetirSI.setPreferredSize(new Dimension(65, 65));
+        image = new ImageIcon(Objects.requireNonNull(getClass().getResource("/myProject/recursos/si.png")));
+        botonRepetirSI.setIcon(new ImageIcon(image.getImage().getScaledInstance(65, 65, Image.SCALE_SMOOTH)));
+        botonRepetirSI.setBorderPainted(false);
+        botonRepetirSI.setContentAreaFilled(false);
+        panelOpciones.add(botonRepetirSI);
+
+        botonRepetirNO = new JButton();
+        botonRepetirNO.addActionListener(escucha);
+        botonNO.setPreferredSize(new Dimension(65, 65));
+        image = new ImageIcon(Objects.requireNonNull(getClass().getResource("/myProject/recursos/no.png")));
+        botonRepetirNO.setIcon(new ImageIcon(image.getImage().getScaledInstance(65, 65, Image.SCALE_SMOOTH)));
+        botonRepetirNO.setBorderPainted(false);
+        botonRepetirNO.setContentAreaFilled(false);
+        panelOpciones.add(botonRepetirNO);
+        revalidate();
+        repaint();
+    }
+
+    /**
+     * This method creates the first phase of the game:
+     * 1) to display the words to memorize on the screen
+     * 2) to start timer
+     */
+    public void iniciarNivel()
+    {
+        panelGame.removeAll();
+        crearComponentesPanelGame();
+        labelPalabra.setText(model.getPalabrasMemorizar());
+        //model.hacerPruebasPorConsola();//in case of doing fast tests by console
+        botonIniciar.setVisible(false);
+        fase = 1;
+        counter = 1;
+        timer.start();
+        revalidate();
+        repaint();
+    }
+
+    /**
      * Main process of the Java program
      * @param args Object used in order to send input data from command line when
      *             the program is execute by console.
