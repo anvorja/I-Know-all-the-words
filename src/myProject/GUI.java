@@ -270,6 +270,57 @@ public class GUI extends JFrame {
     }
 
     /**
+     * Create the following components to start the game:
+     * 1) Time label
+     * 2) Level label
+     * 2) Tag words to be memorized
+     */
+    public void crearComponentesPanelGame()
+    {
+
+        labelNivel = new JLabel("NIVEL: " + Integer.toString(model.getNivelActual()));
+        labelNivel.setFont(new Font("Impact", Font.PLAIN, 24));
+        layoutPanelGame.gridx = 0;
+        layoutPanelGame.gridy = 0;
+        layoutPanelGame.gridwidth = 1;
+        layoutPanelGame.fill = GridBagConstraints.NONE;
+        layoutPanelGame.anchor = GridBagConstraints.LINE_START;
+        panelGame.add(labelNivel, layoutPanelGame);
+
+        labelTiempo = new JLabel("00:00");
+        labelTiempo.setFont(new Font("Impact", Font.PLAIN, 24));
+        layoutPanelGame.gridx = 1;
+        layoutPanelGame.gridy = 0;
+        layoutPanelGame.gridwidth = 1;
+        layoutPanelGame.fill = GridBagConstraints.NONE;
+        layoutPanelGame.anchor = GridBagConstraints.LINE_END;
+        panelGame.add(labelTiempo, layoutPanelGame);
+
+        panelPalabras = new JPanel(new GridBagLayout());
+        GridBagConstraints layoutPanelPalabras = new GridBagConstraints();
+        panelPalabras.setPreferredSize(new Dimension(690, 350));
+        panelPalabras.setOpaque(false);
+        layoutPanelGame.gridx = 0;
+        layoutPanelGame.gridy = 1;
+        layoutPanelGame.gridwidth = 2;
+        layoutPanelGame.fill = GridBagConstraints.NONE;
+        layoutPanelGame.anchor = GridBagConstraints.CENTER;
+        panelGame.add(panelPalabras, layoutPanelGame);
+
+        labelPalabra = new JLabel();
+        labelPalabra.setFont(new Font("Impact", Font.PLAIN, 50));
+        layoutPanelPalabras.gridx = 0;
+        layoutPanelPalabras.gridy = 0;
+        layoutPanelPalabras.gridwidth = 1;
+        layoutPanelPalabras.fill = GridBagConstraints.NONE;
+        layoutPanelPalabras.anchor = GridBagConstraints.CENTER;
+        panelPalabras.add(labelPalabra, layoutPanelPalabras);
+        timer = new Timer(1000, escucha);
+        revalidate();
+        repaint();
+    }
+
+    /**
      * Main process of the Java program
      * @param args Object used in order to send input data from command line when
      *             the program is execute by console.
