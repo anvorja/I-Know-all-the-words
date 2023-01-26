@@ -1,7 +1,8 @@
 # I know that word!
-Este proyecto pertenece a:  
+Project created in collaboration with:   
 Carlos Andrés Borja - borja.carlos@correounivalle.edu.co     
 Deisy Catalina Melo - deisy.melo@correounivalle.edu.co  
+
 Universidad del Valle   
 Escuela de Ingeniería de Sistemas y Computación     
 Asignatura: Fundamentos de Programación Orientada a Eventos     
