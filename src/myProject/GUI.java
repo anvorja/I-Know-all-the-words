@@ -126,6 +126,58 @@ public class GUI extends JFrame {
     }
 
     /**
+     * This method creates and adds to the home panel the components:
+     * 1) JLabel labelUsername: label to indicate what you want the user to enter in
+     * the text box
+     * 2) JTextField entradaUsuario: component for text input
+     * 3) JButton botonOk: confirmation button after entering username
+     */
+    public void componentesDelPanelInicio()
+    {
+        // Layout component
+        GridBagConstraints layoutPanelInicio = new GridBagConstraints();
+        // Label for user
+        labelUsername = new JLabel();
+        image = new ImageIcon(Objects.requireNonNull(getClass().getResource("/myProject/recursos/username.png")));
+        labelUsername.setIcon(new ImageIcon(image.getImage().getScaledInstance(200, 50, Image.SCALE_SMOOTH)));
+        layoutPanelInicio.gridx = 0;
+        layoutPanelInicio.gridy = 0;
+        layoutPanelInicio.gridwidth = 2;
+        layoutPanelInicio.fill = GridBagConstraints.NONE;
+        layoutPanelInicio.anchor = GridBagConstraints.CENTER;
+        panelInicio.add(labelUsername, layoutPanelInicio);
+
+        // TextField input box
+        entradaUsuario = new JTextField();
+        entradaUsuario.setPreferredSize(new Dimension(250, 40));
+        entradaUsuario.setFont(new Font("Arial ", Font.PLAIN, 30));
+        layoutPanelInicio.gridx = 0;
+        layoutPanelInicio.gridy = 1;
+        layoutPanelInicio.gridwidth = 1;
+        layoutPanelInicio.fill = GridBagConstraints.NONE;
+        layoutPanelInicio.anchor = GridBagConstraints.LINE_END;
+        panelInicio.add(entradaUsuario, layoutPanelInicio);
+
+        // Confirmation button
+        botonOK = new JButton();
+        botonOK.addActionListener(escucha);
+        botonOK.setPreferredSize(new Dimension(57, 57));
+        image = new ImageIcon(Objects.requireNonNull(getClass().getResource("/myProject/recursos/okB.png")));
+        botonOK.setIcon(new ImageIcon(image.getImage().getScaledInstance(57, 57, Image.SCALE_SMOOTH)));
+        botonOK.setBorderPainted(false);
+        botonOK.setContentAreaFilled(false);
+        layoutPanelInicio.gridx = 1;
+        layoutPanelInicio.gridy = 1;
+        layoutPanelInicio.gridwidth = 1;
+        layoutPanelInicio.fill = GridBagConstraints.NONE;
+        layoutPanelInicio.anchor = GridBagConstraints.LINE_START;
+        panelInicio.add(botonOK, layoutPanelInicio);
+        revalidate();
+        repaint();
+    }
+
+
+    /**
      * Main process of the Java program
      * @param args Object used in order to send input data from command line when
      *             the program is execute by console.
