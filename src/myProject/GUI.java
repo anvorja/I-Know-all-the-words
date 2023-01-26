@@ -321,6 +321,48 @@ public class GUI extends JFrame {
     }
 
     /**
+     * This method generates the option to continue to the next phase of the game
+     * and create:
+     * 1) JLabel informative message
+     * 2) JButton continue: try to complete the required hits
+     */
+    public void inicioFase2()
+    {
+        revalidate();
+        repaint();
+        intro.setText("\n               ¡Es hora de la verdad! \n   Demuestra cuánto has logrado\n   " +
+                "memorizar\n");
+        intro.setBackground(new Color(0, 0, 0, 150));
+        intro.setPreferredSize(new Dimension(400, 200));
+        intro.setForeground(Color.WHITE);
+        intro.setOpaque(true);
+        layoutPanelGame.gridx = 0;
+        layoutPanelGame.gridy = 0;
+        layoutPanelGame.gridwidth = 1;
+        layoutPanelGame.fill = GridBagConstraints.NONE;
+        layoutPanelGame.anchor = GridBagConstraints.CENTER;
+        panelGame.add(intro, layoutPanelGame);
+
+        botonContinuar = new JButton();
+        botonContinuar.addActionListener(escucha);
+        botonContinuar.setPreferredSize(new Dimension(200, 65));
+        image = new ImageIcon(Objects.requireNonNull(getClass().getResource("/myProject/recursos/continuar.png")));
+        botonContinuar.setIcon(new ImageIcon(image.getImage().getScaledInstance(200, 65, Image.SCALE_SMOOTH)));
+        botonContinuar.setBorderPainted(false);
+        botonContinuar.setContentAreaFilled(false);
+        layoutPanelGame.gridx = 0;
+        layoutPanelGame.gridy = 1;
+        layoutPanelGame.gridwidth = 1;
+        layoutPanelGame.fill = GridBagConstraints.NONE;
+        layoutPanelGame.anchor = GridBagConstraints.LINE_END;
+        panelGame.add(botonContinuar, layoutPanelGame);
+        revalidate();
+        repaint();
+    }
+
+
+
+    /**
      * Main process of the Java program
      * @param args Object used in order to send input data from command line when
      *             the program is execute by console.
