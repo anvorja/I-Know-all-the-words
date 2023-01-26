@@ -2,15 +2,43 @@ package myProject;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Objects;
 
 /**
- * This class is used for ...
- * @autor Paola-J Rodriguez-C paola.rodriguez@correounivalle.edu.co
- * @version v.1.0.0 date:21/11/2021
+ * This class is designed in order to view Model class
+ *
+ * @author Deisy Catalina Melo - deisy.melo@correounivalle.edu.co
+ *         Carlos Andrés Borja - borja.carlos@correounivalle.edu.co
+ * @version v.1.0.5 date: 15/02/2022
  */
 public class GUI extends JFrame {
 
     private Header headerProject;
+    private Model model;
+    private Escucha escucha;
+
+    // Information on the help button, in the home panel: when the user is asked
+    private static final String INFO1 = "Con el nombre de usuario podremos guardar tus avances\n Ingresa sólo " +
+            "caracteres en minúsculas, evita el uso de la Ñ y/o espacios en blanco";
+    // Information on the help button, in the game panel.
+    private static final String INFO2 = " Puedes salir en cualquier momento.\n"
+            + "Sin embargo, si la partida no ha terminado la próxima vez que ingreses se iniciará la misma,\n " +
+            "excepto si tu ultimo nivel aprobado es mayor o igual al  8, en este caso siempre iniciaras en \n el " +
+            "mismo nivel ";
+
+    private JPanel panelInicio, panelGame, panelBotones, panelPalabras, panelOpciones;
+    private JTextField entradaUsuario;
+    private JTextArea intro;
+    private JButton botonOK, botonHelp, botonExit, botonIniciar, botonInstrucciones, botonSI, botonNO, botonContinuar, botonRepetirSI, botonRepetirNO;
+    private JLabel labelUsername, labelInstrucciones, labelNivel, labelTiempo, labelPalabra;
+    private ImageIcon image;
+    private boolean opcionHelp;
+    private String nombreJugador;
+    private int fase, counter;
+    private Timer timer;
+    private GridBagConstraints constraints, layoutPanelGame; // JFrame and panelGame layout component
 
     /**
      * Constructor of GUI class
