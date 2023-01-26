@@ -231,6 +231,45 @@ public class GUI extends JFrame {
     }
 
     /**
+     * This method creates the panel on which the game buttons are located and the
+     * following components:
+     * 1) Instruction Button
+     * 2) Start Game Button
+     */
+    public void crearPanelBotonesInicio()
+    {
+
+        panelBotones = new JPanel();
+        panelBotones.setPreferredSize(new Dimension(900, 100));
+        panelBotones.setOpaque(false);
+        constraints.gridx = 0;
+        constraints.gridy = 3;
+        constraints.gridwidth = 2;
+        constraints.fill = GridBagConstraints.HORIZONTAL;
+        constraints.anchor = GridBagConstraints.CENTER;
+        this.add(panelBotones, constraints);
+
+        botonInstrucciones = new JButton();
+        botonInstrucciones.addActionListener(escucha);
+        botonInstrucciones.setPreferredSize(new Dimension(200, 65));
+        image = new ImageIcon(Objects.requireNonNull(getClass().getResource("/myProject/recursos/instruB.png")));
+        botonInstrucciones.setIcon(new ImageIcon(image.getImage().getScaledInstance(200, 65, Image.SCALE_SMOOTH)));
+        botonInstrucciones.setBorderPainted(false);
+        botonInstrucciones.setContentAreaFilled(false);
+        panelBotones.add(botonInstrucciones);
+
+        botonIniciar = new JButton();
+        botonIniciar.addActionListener(escucha);
+        botonIniciar.setPreferredSize(new Dimension(200, 65));
+        image = new ImageIcon(Objects.requireNonNull(getClass().getResource("/myProject/recursos/playB.png")));
+        botonIniciar.setIcon(new ImageIcon(image.getImage().getScaledInstance(200, 65, Image.SCALE_SMOOTH)));
+        botonIniciar.setBorderPainted(false);
+        botonIniciar.setContentAreaFilled(false);
+        panelBotones.add(botonIniciar);
+
+    }
+
+    /**
      * Main process of the Java program
      * @param args Object used in order to send input data from command line when
      *             the program is execute by console.
