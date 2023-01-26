@@ -11,7 +11,7 @@ import java.util.Objects;
  *
  * @author Deisy Catalina Melo - deisy.melo@correounivalle.edu.co
  *         Carlos Andrés Borja - borja.carlos@correounivalle.edu.co
- * @version v.1.0.5 date: 15/02/2022
+ * @version v
  */
 public class GUI extends JFrame {
 
@@ -43,17 +43,16 @@ public class GUI extends JFrame {
     /**
      * Constructor of GUI class
      */
-    public GUI(){
+    public GUI()
+    {
+        this.setContentPane(new Canvas(1)); // to Paint the background image of the Frame
         initGUI();
-
-        //Default JFrame configuration
-        this.setTitle("The Title app");
-        this.setSize(200,100);
-        //this.pack();
+        // Default JFrame configuration
+        this.setUndecorated(true);
+        this.pack();
         this.setResizable(true);
         this.setVisible(true);
         this.setLocationRelativeTo(null);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     /**
@@ -61,12 +60,69 @@ public class GUI extends JFrame {
      * create Listener and control Objects used for the GUI class
      */
     private void initGUI() {
-        //Set up JFrame Container's Layout
-        //Create Listener Object and Control Object
-        //Set up JComponents
-        headerProject = new Header("Header ...", Color.BLACK);
 
-        this.add(headerProject,BorderLayout.NORTH); //Change this line if you change JFrame Container's Layout
+
+        // Set up JFrame Container's Layout
+        this.setLayout(new GridBagLayout());
+        constraints = new GridBagConstraints();
+
+        // Create Listener Object or Control Object
+        escucha = new Escucha();
+        model = new Model();
+        // Set up JComponents
+        opcionHelp = false; // It is used to know what message in the help button should be shown
+
+        // Frame header
+        headerProject = new Header("I KNOW THAT WORD", new Color(135, 7, 122));
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        constraints.gridwidth = 2;
+        constraints.fill = GridBagConstraints.HORIZONTAL;
+        this.add(headerProject, constraints);
+
+        // Button Creation
+        botonHelp = new JButton();
+        botonHelp.addActionListener(escucha);
+        botonHelp.setPreferredSize(new Dimension(80, 50));
+        image = new ImageIcon(Objects.requireNonNull(getClass().getResource("/myProject/recursos/help1.png")));
+        botonHelp.setIcon(new ImageIcon(image.getImage().getScaledInstance(80, 50, Image.SCALE_SMOOTH)));
+        botonHelp.setBorderPainted(false);
+        botonHelp.setContentAreaFilled(false);
+        constraints.gridx = 0;
+        constraints.gridy = 1;
+        constraints.gridwidth = 1;
+        constraints.fill = GridBagConstraints.NONE;
+        constraints.anchor = GridBagConstraints.LINE_START;
+        this.add(botonHelp, constraints);
+
+        botonExit = new JButton();
+        botonExit.addActionListener(escucha);
+        image = new ImageIcon(Objects.requireNonNull(getClass().getResource("/myProject/recursos/close1.png")));
+        botonExit.setPreferredSize(new Dimension(80, 50));
+        botonExit.setIcon(new ImageIcon(image.getImage().getScaledInstance(80, 50, Image.SCALE_SMOOTH)));
+        botonExit.setBorderPainted(false);
+        botonExit.setContentAreaFilled(false);
+        constraints.gridx = 1;
+        constraints.gridy = 1;
+        constraints.gridwidth = 1;
+        constraints.fill = GridBagConstraints.NONE;
+        constraints.anchor = GridBagConstraints.LINE_END;
+        this.add(botonExit, constraints);
+
+        // This is the panel that contains the user label, the text input and the
+        // confirmation button
+        panelInicio = new JPanel(new GridBagLayout()); // Set up JPanel Container's Layout
+        panelInicio.setPreferredSize(new Dimension(900, 500));
+        panelInicio.setOpaque(false);
+        constraints.gridx = 0;
+        constraints.gridy = 2;
+        constraints.gridwidth = 2;
+        constraints.fill = GridBagConstraints.NONE;
+        constraints.anchor = GridBagConstraints.CENTER;
+        this.add(panelInicio, constraints);
+        componentesDelPanelInicio();
+        revalidate();
+        repaint();
     }
 
     /**
