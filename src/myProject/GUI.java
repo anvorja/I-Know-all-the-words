@@ -191,6 +191,44 @@ public class GUI extends JFrame {
         return image;
     }
 
+    /**
+     * After entering the user, create the following components:
+     * 1) JPanel panelGame: the game takes place in it
+     * 2) JTextArea intro: start message
+     * 3) Invokes the method to add the instructions and play buttons
+     */
+    public void crearPanelGame()
+    {
+        panelGame = new Canvas(2); // Create the panel with the image
+        panelGame.setLayout(new GridBagLayout()); // Set up JPanel Container's Layout
+        layoutPanelGame = new GridBagConstraints(); // panelGame layout component
+        panelGame.setPreferredSize(new Dimension(700, 400));
+        constraints.gridx = 0;
+        constraints.gridy = 2;
+        constraints.gridwidth = 2;
+        constraints.fill = GridBagConstraints.NONE;
+        constraints.anchor = GridBagConstraints.CENTER;
+        this.add(panelGame, constraints);
+
+        intro = new JTextArea("   ¡HOLA " + nombreJugador.toUpperCase() + "!\n" +
+                "   Estas en el nivel " + model.getNivelActual() + "\n   Presiona PLAY para iniciar");
+        intro.setEditable(false);
+        intro.setLineWrap(true);
+        intro.setWrapStyleWord(true);
+        intro.setBackground(new Color(186, 186, 252, 130));
+        intro.setOpaque(true);
+        intro.setPreferredSize(new Dimension(400, 150));
+        intro.setFont(new Font("Impact", Font.PLAIN, 28));
+        layoutPanelGame.gridx = 0;
+        layoutPanelGame.gridy = 0;
+        layoutPanelGame.gridwidth = 1;
+        layoutPanelGame.fill = GridBagConstraints.NONE;
+        layoutPanelGame.anchor = GridBagConstraints.CENTER;
+        panelGame.add(intro, layoutPanelGame);
+        crearPanelBotonesInicio();
+        revalidate();
+        repaint();
+    }
 
     /**
      * Main process of the Java program
