@@ -510,19 +510,173 @@ public class GUI extends JFrame {
 
     /**
      * Main process of the Java program
+     *
      * @param args Object used in order to send input data from command line when
-     *             the program is execute by console.
+     *             the program is executed by console.
      */
-    public static void main(String[] args){
+    public static void main(String[] args)
+    {
         EventQueue.invokeLater(() -> {
             GUI miProjectGUI = new GUI();
         });
     }
 
     /**
-     * inner class that extends an Adapter Class or implements Listeners used by GUI class
+     * Inner class that extends an Adapter Class or implements Listeners used by GUI
+     * class
      */
-    private class Escucha {
+    private class Escucha implements ActionListener
+    {
 
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+            if (e.getSource() == timer)
+            {
+                labelTiempo.setText("00:0" + counter);
+                counter++;
+
+                if (fase == 1)
+                {
+                    if (counter > 5)
+                    {
+                        labelPalabra.setText(model.getPalabrasMemorizar());
+                        counter = 1;
+                    }
+                    if (Objects.equals(labelPalabra.getText(), ""))
+                    {
+                        timer.stop();
+                        panelGame.removeAll();
+                        revalidate();
+                        repaint();
+                        inicioFase2();
+                    }
+                }
+                if (fase == 2)
+                {
+                    if (counter > 7)
+                    {
+                        labelPalabra.setText(model.getPalabrasAleatorias());
+                        counter = 1;
+                    }
+                    if (Objects.equals(labelPalabra.getText(), ""))
+                    {
+                        timer.stop();
+                        panelGame.removeAll();
+                        revalidate();
+                        repaint();
+                        continuarNivel();
+                    }
+                }
+
+            }
+
+            if (e.getSource() == botonExit)
+            {
+
+                if (entradaUsuario.getText().isEmpty())
+                {
+                    System.exit(0);
+                }
+                else if (!model.validarEntradaTexto(entradaUsuario.getText())) {
+                    JOptionPane.showMessageDialog(null, "No se permite guardar partida, usuario NO válido");
+                }
+                else
+                    System.exit(0);
+
+            }
+
+            if (e.getSource() == botonHelp)
+            {
+                if (!opcionHelp)
+                    JOptionPane.showMessageDialog(null, INFO1, "USERNAME", JOptionPane.PLAIN_MESSAGE, iconoMessage(
+                            "/myProject/recursos/imageUser.png", 50, 50));
+                else
+                    JOptionPane.showMessageDialog(null, INFO2, null, JOptionPane.INFORMATION_MESSAGE);
+
+            }
+
+            if (e.getSource() == botonOK)
+            {
+
+                if (!entradaUsuario.getText().isEmpty())
+                {
+                    nombreJugador = entradaUsuario.getText();
+
+                    // We validate that it does not have special characters
+                    if (model.validarEntradaTexto(nombreJugador)) {
+                        opcionHelp = true;
+                        remove(panelInicio);
+                        // We search the user and determine his level
+                        model.buscarElUsuario(nombreJugador);
+                        crearPanelGame();
+                        revalidate();
+                        repaint();
+
+                    } else
+                        JOptionPane.showMessageDialog(null, "No se aceptan caracteres especiales ni espacios");
+
+                } else
+                    JOptionPane.showMessageDialog(null, "Debes ingresar el nombre de usuario", "Username is required",
+                            JOptionPane.ERROR_MESSAGE);
+
+            }
+
+            if (e.getSource() == botonInstrucciones)
+            {
+                labelInstrucciones = new JLabel();
+                image = new ImageIcon(
+                        Objects.requireNonNull(getClass().getResource("/myProject/recursos/instrucciones.png")));
+                labelInstrucciones.setIcon(new ImageIcon(image.getImage().getScaledInstance(600, 480,
+                        Image.SCALE_SMOOTH)));
+                JOptionPane.showMessageDialog(null, labelInstrucciones, null, JOptionPane.PLAIN_MESSAGE);
+
+            }
+
+            if (e.getSource() == botonIniciar)
+                iniciarNivel();
+
+            if (e.getSource() == botonSI)
+            {
+                model.validarPalabraCorrecta(labelPalabra.getText());
+                labelPalabra.setText(model.getPalabrasAleatorias());
+                counter = 1;
+                revalidate();
+                repaint();
+            }
+
+            if (e.getSource() == botonNO)
+            {
+                model.validarPalabraIncorrecta(labelPalabra.getText());
+                labelPalabra.setText(model.getPalabrasAleatorias());
+                counter = 1;
+                revalidate();
+                repaint();
+            }
+
+            if (e.getSource() == botonContinuar)
+            {
+                panelGame.remove(intro);
+                panelGame.remove(botonContinuar);
+                fase = 2;
+                revalidate();
+                repaint();
+                crearComponentesPanelGame();
+                panelPalabras.setPreferredSize(new Dimension(690, 260));
+                crearComponentesFase2();
+                labelPalabra.setText(model.getPalabrasAleatorias());
+                timer.start();
+            }
+
+            if (e.getSource() == botonRepetirSI)
+            {
+                model.setNivelesAprobados(true);
+                iniciarNivel();
+            }
+
+            if (e.getSource() == botonRepetirNO)
+                iniciarNivel();
+
+        }
     }
 }
