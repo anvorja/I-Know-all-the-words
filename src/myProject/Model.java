@@ -231,4 +231,52 @@ public class Model
         }
         return palabraAleatoria;
     }
+
+    /**
+     * Getter method of the hits number
+     * @return int aciertos
+     */
+    public int  getAciertos()
+    {
+        return aciertos;
+    }
+
+    /**
+     * Getter method of the wrong words number
+     * @return int errores
+     */
+    public int getErrores(){
+        errores = cantPalabrasDelNivel-aciertos;
+        return errores;
+    }
+
+    /**
+     * This method returns the percentage that represents the number of hits
+     * @return int
+     */
+    public int porcentajeAciertos()
+    {
+        return ((aciertos*100)/cantPalabrasDelNivel);
+    }
+
+    /**
+     * Getter method of current level
+     * @return int nivelActual
+     */
+    public int getNivelActual()
+    {
+        return nivelActual;
+    }
+
+    /**
+     * This method determines whether the player passes the level
+     * @return boolean flagNivel
+     */
+    public boolean getApruebaNivel(){
+        if(aciertos >= (cantPalabrasDelNivel*porcentajeAciertos)){
+            flagNivel = true;
+        }
+        return flagNivel;
+    }
+
 }
