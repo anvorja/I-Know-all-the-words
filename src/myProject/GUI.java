@@ -176,6 +176,21 @@ public class GUI extends JFrame {
         repaint();
     }
 
+    /**
+     * This method returns an object of type Icon. It is used for the help button
+     * icon
+     *
+     * @param reference String, path
+     * @param width     int
+     * @param height    int
+     * @return Icon
+     */
+    public Icon iconoMessage(String reference, int width, int height) {
+        image = new ImageIcon(Objects.requireNonNull(getClass().getResource(reference)));
+        image = new ImageIcon(image.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH));
+        return image;
+    }
+
 
     /**
      * Main process of the Java program
