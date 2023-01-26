@@ -7,7 +7,7 @@ import java.util.Random;
  * This class is designed in order to applies the game rules
  * @author Deisy Catalina Melo - deisy.melo@correounivalle.edu.co
  *         Carlos Andrés Borja - borja.carlos@correounivalle.edu.co
- * @version v.
+ * @version v.1.2 date 25/01/2023
  */
 public class Model
 {
@@ -314,22 +314,4 @@ public class Model
         arrayDePalabrasAleatorias.clear();
     }
 
-    /*
-     * In case of doing fast tests by console
-     */
-//    public void hacerPruebasPorConsola()
-//    {
-//
-//        System.out.println("**Correctas**");
-//        for (String elementoC : arraListPalabrasCorrectas) {
-//            System.out.print(elementoC + " ");
-//        }
-//        System.out.println("\n**Incorrectas**");
-//        for (String elementoI : arraListPalabrasIncorrectas) {
-//            System.out.print(elementoI + " ");
-//        }
-//
-//        System.out.println("\nPalabras aleatorias: "+arrayDePalabrasAleatorias.size());
-//
-//    }
 }

@@ -11,7 +11,7 @@ import java.util.Objects;
  *
  * @author Deisy Catalina Melo - deisy.melo@correounivalle.edu.co
  *         Carlos Andrés Borja - borja.carlos@correounivalle.edu.co
- * @version v
+ * @version v.1.0.5 date: 25/01/2023
  */
 public class GUI extends JFrame {
 
@@ -59,8 +59,8 @@ public class GUI extends JFrame {
      * This method is used to set up the default JComponent Configuration,
      * create Listener and control Objects used for the GUI class
      */
-    private void initGUI() {
-
+    private void initGUI()
+    {
 
         // Set up JFrame Container's Layout
         this.setLayout(new GridBagLayout());
@@ -507,6 +507,7 @@ public class GUI extends JFrame {
         revalidate();
         repaint();
     }
+
 
     /**
      * Main process of the Java program

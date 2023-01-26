@@ -7,7 +7,7 @@ import java.util.Objects;
  * This class is created in order to manipulate the user, his name and level
  * @author Deisy Catalina Melo - deisy.melo@correounivalle.edu.co
  *         Carlos Andrés Borja - borja.carlos@correounivalle.edu.co
- * @version v.
+ * @version v.1.0.4 date: 24/01/2023
  */
 public class User
 {

@@ -9,7 +9,7 @@ import java.util.Objects;
  * This class allows to manipulate .txt files to be read or to write to them
  * @author Deisy Catalina Melo - deisy.melo@correounivalle.edu.co
  *         Carlos Andrés Borja - borja.carlos@correounivalle.edu.co
- * @version v
+ * @version v.1.2.1 date: 25/01/2023
  */
 public class FileManager
 {
