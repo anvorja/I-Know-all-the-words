@@ -164,4 +164,71 @@ public class Model
             case 10->porcentajeAciertos = 1;
         }
     }
+
+    /**
+     * Method that determines if the word received as parameter is in the arrayList of Correct words.
+     * If the word if is found, it will be taken as a hit.
+     * This parameter is the word that the player indicates when pressing the SI button
+     * @param palabra
+     */
+    public void validarPalabraCorrecta(String palabra)
+    {
+        for (String elementoListCorrecta : arraListPalabrasCorrectas)
+        {
+            if (elementoListCorrecta.equals(palabra))
+            {
+                aciertos++;
+                break;
+            }
+        }
+    }
+
+    /**
+     * Method that determines if the word received as parameter is in the arrayList of Incorrect words.
+     * If the word if is found, it will be taken as a hit.
+     * This parameter is the word that the player indicates when pressing the NO button
+     * @param palabra
+     */
+    public void validarPalabraIncorrecta(String palabra)
+    {
+        for (String elementoListIncorrecta : arraListPalabrasIncorrectas)
+        {
+            if (elementoListIncorrecta.equals(palabra))
+            {
+                aciertos++;
+                break;
+            }
+        }
+    }
+
+    /**
+     * This method returns a word to be memorized, extracts it from the arrayList of Correct Words
+     * @return String palabraMemorizar
+     */
+    public String getPalabrasMemorizar()
+    {
+        String palabraMemorizar = "";
+        if (flagPalabrasCorrectas < arraListPalabrasCorrectas.size())
+        {
+            palabraMemorizar = arraListPalabrasCorrectas.get(flagPalabrasCorrectas);
+            flagPalabrasCorrectas++;
+        }
+        return palabraMemorizar;
+    }
+
+    /**
+     * This method returns a word to display on the screen, it can be a correct or incorrect word.
+     * This word comes from arrayDePalabrasAleatorias ArrayList
+     * @return String palabraAleatoria
+     */
+    public String getPalabrasAleatorias()
+    {
+        String palabraAleatoria = "";
+        if(flagPalabrasAleatorias < arrayDePalabrasAleatorias.size())
+        {
+            palabraAleatoria = arrayDePalabrasAleatorias.get(flagPalabrasAleatorias);
+            arrayDePalabrasAleatorias.remove(palabraAleatoria);
+        }
+        return palabraAleatoria;
+    }
 }
