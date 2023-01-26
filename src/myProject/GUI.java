@@ -360,7 +360,97 @@ public class GUI extends JFrame {
         repaint();
     }
 
+    /**
+     * Create the necessary components to try to complete the hits required, these
+     * are:
+     * 1) JButton option YES
+     * 2) JButton option NO
+     */
+    public void crearComponentesFase2()
+    {
+        panelOpciones = new JPanel();
+        panelOpciones.setPreferredSize(new Dimension(690, 87));
+        panelOpciones.setOpaque(false);
+        layoutPanelGame.gridx = 0;
+        layoutPanelGame.gridy = 2;
+        layoutPanelGame.gridwidth = 2;
+        layoutPanelGame.fill = GridBagConstraints.NONE;
+        layoutPanelGame.anchor = GridBagConstraints.CENTER;
+        panelGame.add(panelOpciones, layoutPanelGame);
 
+        botonSI = new JButton();
+        botonSI.addActionListener(escucha);
+        botonSI.setPreferredSize(new Dimension(85, 85));
+        image = new ImageIcon(Objects.requireNonNull(getClass().getResource("/myProject/recursos/si.png")));
+        botonSI.setIcon(new ImageIcon(image.getImage().getScaledInstance(85, 85, Image.SCALE_SMOOTH)));
+        botonSI.setBorderPainted(false);
+        botonSI.setContentAreaFilled(false);
+        panelOpciones.add(botonSI);
+
+        botonNO = new JButton();
+        botonNO.addActionListener(escucha);
+        botonNO.setPreferredSize(new Dimension(85, 85));
+        image = new ImageIcon(Objects.requireNonNull(getClass().getResource("/myProject/recursos/no.png")));
+        botonNO.setIcon(new ImageIcon(image.getImage().getScaledInstance(85, 85, Image.SCALE_SMOOTH)));
+        botonNO.setBorderPainted(false);
+        botonNO.setContentAreaFilled(false);
+        panelOpciones.add(botonNO);
+        revalidate();
+        repaint();
+    }
+
+    /**
+     * This method creates the necessary components to continue another level
+     */
+    public void continuarNivel()
+    {
+        String textoFinal = "";
+        int aciertos = model.getAciertos();
+        int porcentaje = model.porcentajeAciertos();
+        int errores = model.getErrores();
+
+
+        if (model.getApruebaNivel() && model.getNivelActual() < 10)
+        {
+            textoFinal = "\n               Has superado el nivel. " +
+                    "\n Aciertos: " + aciertos +
+                    "\n Errores: "+ errores +
+                    "\n Porcentaje: " + porcentaje + "%\n";
+        }
+        if (model.getApruebaNivel() && model.getNivelActual() == 10)
+        {
+            model.setNivelesAprobados(false);
+            textoFinal = "\n   GANASTE!  Has superado el nivel. " +
+                    "\n Aciertos: " + aciertos +
+                    "\n Errores: "+ errores +
+                    "\n Porcentaje: " + porcentaje + "%" + "\n   ¿Deseas empezar desde nivel 1?";
+            crearComponentesRepetir();
+
+        } else if (!model.getApruebaNivel()) {
+            textoFinal = "\n               No has superado el nivel. " +
+                    "\n Aciertos: " + aciertos +
+                    "\n Errores: "+ errores +
+                    "\n Porcentaje: " + porcentaje + "%\n";
+        }
+
+        if (model.getNivelActual() < 10)
+        {
+            model.setNivelesAprobados(false);
+            botonIniciar.setVisible(true);
+        }
+        intro.setPreferredSize(new Dimension(400, 250));
+
+        intro.setText(textoFinal);
+        layoutPanelGame.gridx = 0;
+        layoutPanelGame.gridy = 0;
+        layoutPanelGame.gridwidth = 2;
+        layoutPanelGame.fill = GridBagConstraints.NONE;
+        layoutPanelGame.anchor = GridBagConstraints.CENTER;
+        panelGame.add(intro, layoutPanelGame);
+        revalidate();
+        repaint();
+
+    }
 
     /**
      * Main process of the Java program
